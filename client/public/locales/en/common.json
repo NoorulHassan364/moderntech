@@ -1,0 +1,43 @@
+{
+  "nav": {
+    "services": "Services",
+    "about": "About",
+    "portfolio": "Portfolio",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Innovate. Create. Transform.",
+    "subtitle": "We build cutting-edge software solutions that drive business growth and transform user experiences.",
+    "cta": {
+      "start": "Start Your Project",
+      "learn": "Learn More"
+    }
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Comprehensive solutions tailored to elevate your business in the digital age"
+  },
+  "about": {
+    "title": "Who We Are",
+    "subtitle": "A team of passionate developers dedicated to creating innovative software solutions",
+    "mission": {
+      "title": "Our Mission",
+      "description": "To empower businesses with cutting-edge technology solutions that drive growth and innovation in the digital age."
+    }
+  },
+  "portfolio": {
+    "title": "Our Work",
+    "subtitle": "Explore our portfolio of successful projects and innovative solutions"
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "subtitle": "Ready to start your next project? We'd love to hear from you!",
+    "form": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "message": "Message",
+      "submit": "Send Message"
+    }
+  }
+}

@@ -3,10 +3,13 @@ import { Link } from 'wouter';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
+import LanguageSwitcher from './LanguageSwitcher';
+import { useTranslation } from 'react-i18next';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,15 +43,17 @@ export default function Navbar() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
-            <NavLink href="/#services">Services</NavLink>
-            <NavLink href="/#about">About</NavLink>
-            <NavLink href="/#portfolio">Portfolio</NavLink>
-            <NavLink href="/#contact">Contact</NavLink>
+            <NavLink href="/#services">{t('nav.services')}</NavLink>
+            <NavLink href="/#about">{t('nav.about')}</NavLink>
+            <NavLink href="/#portfolio">{t('nav.portfolio')}</NavLink>
+            <NavLink href="/#contact">{t('nav.contact')}</NavLink>
+            <LanguageSwitcher />
             <ThemeToggle />
           </div>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center">
+            <LanguageSwitcher />
             <ThemeToggle />
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -67,16 +72,16 @@ export default function Navbar() {
         >
           <div className="pb-4 space-y-4">
             <MobileNavLink href="/#services" onClick={() => setIsMobileMenuOpen(false)}>
-              Services
+              {t('nav.services')}
             </MobileNavLink>
             <MobileNavLink href="/#about" onClick={() => setIsMobileMenuOpen(false)}>
-              About
+              {t('nav.about')}
             </MobileNavLink>
             <MobileNavLink href="/#portfolio" onClick={() => setIsMobileMenuOpen(false)}>
-              Portfolio
+              {t('nav.portfolio')}
             </MobileNavLink>
             <MobileNavLink href="/#contact" onClick={() => setIsMobileMenuOpen(false)}>
-              Contact
+              {t('nav.contact')}
             </MobileNavLink>
           </div>
         </motion.div>
