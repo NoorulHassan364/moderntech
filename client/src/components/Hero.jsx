@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 
 export default function Hero() {
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-background to-background/95">
+    <div className="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-background to-background/95">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute w-full h-full">
@@ -13,17 +13,17 @@ export default function Hero() {
               key={i}
               initial={{ opacity: 0, scale: 0 }}
               animate={{
-                opacity: [0.2, 0.5, 0.2],
-                scale: [1, 2, 1],
-                x: [Math.random() * 100, Math.random() * -100, Math.random() * 100],
-                y: [Math.random() * 100, Math.random() * -100, Math.random() * 100],
+                opacity: [0.3, 0.7, 0.3],
+                scale: [1, 2.5, 1],
+                x: [Math.random() * 200, Math.random() * -200, Math.random() * 200],
+                y: [Math.random() * 200, Math.random() * -200, Math.random() * 200],
               }}
               transition={{
-                duration: Math.random() * 10 + 10,
+                duration: Math.random() * 8 + 8,
                 repeat: Infinity,
                 ease: "linear",
               }}
-              className="absolute w-2 h-2 bg-primary/20 rounded-full"
+              className="absolute w-3 h-3 bg-primary/30 rounded-full"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
@@ -40,7 +40,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-purple-500 to-blue-600 bg-clip-text text-transparent">
+            <h1 className="text-5xl md:text-7xl font-bold mb-8 bg-gradient-to-r from-primary via-purple-500 to-blue-600 bg-clip-text text-transparent">
               Innovate. Create. Transform.
             </h1>
           </motion.div>
@@ -50,7 +50,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <p className="text-xl md:text-2xl text-foreground/70 mb-8">
+            <p className="text-xl md:text-2xl text-foreground/70 mb-12">
               We build cutting-edge software solutions that drive business growth and transform user experiences.
             </p>
           </motion.div>
@@ -59,13 +59,13 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex flex-col md:flex-row gap-4 justify-center"
+            className="flex flex-col md:flex-row gap-6 justify-center mb-20"
           >
-            <Button size="lg" className="group">
+            <Button size="lg" className="group text-lg px-8 py-6">
               Start Your Project
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
-            <Button size="lg" variant="outline">
+            <Button size="lg" variant="outline" className="text-lg px-8 py-6">
               Learn More
             </Button>
           </motion.div>
@@ -74,20 +74,20 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
           >
             <FeatureCard
-              icon={<Code2 className="h-6 w-6" />}
+              icon={<Code2 className="h-8 w-8" />}
               title="Modern Tech Stack"
               description="Built with cutting-edge technologies for optimal performance"
             />
             <FeatureCard
-              icon={<Shield className="h-6 w-6" />}
+              icon={<Shield className="h-8 w-8" />}
               title="Secure by Design"
               description="Enterprise-grade security at every layer"
             />
             <FeatureCard
-              icon={<Rocket className="h-6 w-6" />}
+              icon={<Rocket className="h-8 w-8" />}
               title="Rapid Development"
               description="Quick iterations with continuous deployment"
             />
@@ -101,10 +101,10 @@ export default function Hero() {
 const FeatureCard = ({ icon, title, description }) => (
   <motion.div
     whileHover={{ scale: 1.05 }}
-    className="p-6 rounded-xl bg-card border border-card-border backdrop-blur-sm"
+    className="p-8 rounded-xl bg-card/50 border border-card-border backdrop-blur-sm"
   >
     <div className="text-primary mb-4">{icon}</div>
-    <h3 className="text-lg font-semibold mb-2">{title}</h3>
+    <h3 className="text-xl font-semibold mb-2">{title}</h3>
     <p className="text-foreground/70">{description}</p>
   </motion.div>
 );
