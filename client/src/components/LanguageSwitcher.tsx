@@ -16,12 +16,6 @@ const languages = [
 export default function LanguageSwitcher() {
   const { i18n } = useTranslation();
 
-  const changeLanguage = (lng: string) => {
-    i18n.changeLanguage(lng).catch((err) => {
-      console.error('Error changing language:', err);
-    });
-  };
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -34,7 +28,7 @@ export default function LanguageSwitcher() {
         {languages.map((lang) => (
           <DropdownMenuItem
             key={lang.code}
-            onClick={() => changeLanguage(lang.code)}
+            onClick={() => i18n.changeLanguage(lang.code)}
             className={`cursor-pointer ${
               i18n.language === lang.code ? 'bg-accent' : ''
             }`}
