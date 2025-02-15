@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 
 export default function Hero() {
   return (
-    <div className="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-background to-background/95">
+    <div className="relative min-h-[calc(100vh-4rem)] pt-16 flex items-center justify-center overflow-hidden bg-gradient-to-b from-background to-background/95">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute w-full h-full">
