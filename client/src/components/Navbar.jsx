@@ -1,105 +1,89 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'wouter';
-import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import ThemeToggle from './ThemeToggle';
+import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/button';
 
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const menuItems = [
+    { href: '/', label: 'Home' },
+    { href: '#services', label: 'Services' },
+    { href: '#about', label: 'About' },
+    { href: '#portfolio', label: 'Portfolio' },
+    { href: '#contact', label: 'Contact' },
+  ];
 
   return (
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-background/80 backdrop-blur-md shadow-md' : 'bg-transparent'
-      }`}
+      className="fixed w-full bg-background/80 backdrop-blur-lg z-50 shadow-sm"
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="flex-shrink-0"
-          >
-            <Link href="/">
-              <a className="text-2xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
-                TechCorp
-              </a>
+          <div className="flex-shrink-0">
+            <Link href="/" className="text-2xl font-bold text-primary">
+              Fleet
             </Link>
-          </motion.div>
-
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
-            <NavLink href="/#services">Services</NavLink>
-            <NavLink href="/#about">About</NavLink>
-            <NavLink href="/#portfolio">Portfolio</NavLink>
-            <NavLink href="/#contact">Contact</NavLink>
-            <ThemeToggle />
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center">
-            <ThemeToggle />
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="ml-4 p-2"
+          <div className="hidden md:block">
+            <div className="flex space-x-8">
+              {menuItems.map((item) => (
+                <Button
+                  key={item.label}
+                  variant="ghost"
+                  asChild
+                >
+                  <Link href={item.href}>
+                    {item.label}
+                  </Link>
+                </Button>
+              ))}
+            </div>
+          </div>
+
+          <div className="md:hidden">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleMenu}
+              aria-label="Toggle menu"
             >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </Button>
           </div>
         </div>
 
-        {/* Mobile Menu */}
-        <motion.div
-          initial={false}
-          animate={isMobileMenuOpen ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }}
-          className="md:hidden overflow-hidden"
-        >
-          <div className="pb-4 space-y-4">
-            <MobileNavLink href="/#services" onClick={() => setIsMobileMenuOpen(false)}>
-              Services
-            </MobileNavLink>
-            <MobileNavLink href="/#about" onClick={() => setIsMobileMenuOpen(false)}>
-              About
-            </MobileNavLink>
-            <MobileNavLink href="/#portfolio" onClick={() => setIsMobileMenuOpen(false)}>
-              Portfolio
-            </MobileNavLink>
-            <MobileNavLink href="/#contact" onClick={() => setIsMobileMenuOpen(false)}>
-              Contact
-            </MobileNavLink>
-          </div>
-        </motion.div>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="md:hidden"
+          >
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              {menuItems.map((item) => (
+                <Button
+                  key={item.label}
+                  variant="ghost"
+                  className="w-full justify-start"
+                  asChild
+                >
+                  <Link href={item.href}>
+                    {item.label}
+                  </Link>
+                </Button>
+              ))}
+            </div>
+          </motion.div>
+        )}
       </div>
     </motion.nav>
   );
 }
-
-const NavLink = ({ href, children }) => (
-  <Link href={href}>
-    <a className="text-foreground/70 hover:text-foreground transition-colors duration-200">
-      {children}
-    </a>
-  </Link>
-);
-
-const MobileNavLink = ({ href, children, onClick }) => (
-  <Link href={href}>
-    <a
-      className="block px-4 py-2 text-foreground/70 hover:text-foreground transition-colors duration-200"
-      onClick={onClick}
-    >
-      {children}
-    </a>
-  </Link>
-);

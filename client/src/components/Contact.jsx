@@ -1,8 +1,18 @@
+
+import { Form, Input, Button, Typography, Row, Col, Card } from 'antd';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { MailOutlined, PhoneOutlined, EnvironmentOutlined, SendOutlined } from '@ant-design/icons';
+
+const { Title, Paragraph } = Typography;
+const { TextArea } = Input;
 
 export default function Contact() {
+  const [form] = Form.useForm();
+
+  const onFinish = (values) => {
+    console.log('Form values:', values);
+  };
+
   return (
     <section id="contact" className="py-20 bg-background">
       <div className="container mx-auto px-4">
@@ -13,111 +23,117 @@ export default function Contact() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Get in Touch
-          </h2>
-          <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
+          <Title level={2}>Get in Touch</Title>
+          <Paragraph className="text-lg">
             Ready to start your next project? We'd love to hear from you!
-          </p>
+          </Paragraph>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="space-y-8"
-          >
-            <div>
-              <h3 className="text-2xl font-bold mb-4">Contact Information</h3>
-              <p className="text-foreground/70 mb-8">
-                Fill out the form and we'll get back to you within 24 hours.
-              </p>
-            </div>
-
-            <div className="space-y-6">
-              <ContactInfo
-                icon={<Mail className="w-6 h-6" />}
-                title="Email Us"
-                content="hello@techcorp.com"
-              />
-              <ContactInfo
-                icon={<Phone className="w-6 h-6" />}
-                title="Call Us"
-                content="+1 (555) 123-4567"
-              />
-              <ContactInfo
-                icon={<MapPin className="w-6 h-6" />}
-                title="Visit Us"
-                content="123 Innovation Street, Tech City, TC 12345"
-              />
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <form className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-medium mb-2">First Name</label>
-                  <input
-                    type="text"
-                    className="w-full px-4 py-2 rounded-md border border-input bg-background"
-                    placeholder="John"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2">Last Name</label>
-                  <input
-                    type="text"
-                    className="w-full px-4 py-2 rounded-md border border-input bg-background"
-                    placeholder="Doe"
-                  />
-                </div>
-              </div>
-
+        <Row gutter={24}>
+          <Col xs={24} md={12}>
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="space-y-8"
+            >
               <div>
-                <label className="block text-sm font-medium mb-2">Email</label>
-                <input
-                  type="email"
-                  className="w-full px-4 py-2 rounded-md border border-input bg-background"
-                  placeholder="john@example.com"
-                />
+                <Title level={3}>Contact Information</Title>
+                <Paragraph className="mb-8">
+                  Fill out the form and we'll get back to you within 24 hours.
+                </Paragraph>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium mb-2">Message</label>
-                <textarea
-                  className="w-full px-4 py-2 rounded-md border border-input bg-background min-h-[150px]"
-                  placeholder="Tell us about your project..."
-                />
-              </div>
+              <Card className="space-y-6">
+                <div className="flex items-center gap-4">
+                  <MailOutlined className="text-2xl" />
+                  <div>
+                    <Title level={5}>Email Us</Title>
+                    <Paragraph>hello@techcorp.com</Paragraph>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <PhoneOutlined className="text-2xl" />
+                  <div>
+                    <Title level={5}>Call Us</Title>
+                    <Paragraph>+1 (555) 123-4567</Paragraph>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <EnvironmentOutlined className="text-2xl" />
+                  <div>
+                    <Title level={5}>Visit Us</Title>
+                    <Paragraph>123 Innovation Street, Tech City, TC 12345</Paragraph>
+                  </div>
+                </div>
+              </Card>
+            </motion.div>
+          </Col>
 
-              <Button size="lg" className="w-full group">
-                Send Message
-                <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </form>
-          </motion.div>
-        </div>
+          <Col xs={24} md={12}>
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <Form
+                form={form}
+                layout="vertical"
+                onFinish={onFinish}
+                className="space-y-6"
+              >
+                <Row gutter={16}>
+                  <Col span={12}>
+                    <Form.Item
+                      name="firstName"
+                      label="First Name"
+                      rules={[{ required: true, message: 'Please input your first name!' }]}
+                    >
+                      <Input placeholder="John" />
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <Form.Item
+                      name="lastName"
+                      label="Last Name"
+                      rules={[{ required: true, message: 'Please input your last name!' }]}
+                    >
+                      <Input placeholder="Doe" />
+                    </Form.Item>
+                  </Col>
+                </Row>
+
+                <Form.Item
+                  name="email"
+                  label="Email"
+                  rules={[
+                    { required: true, message: 'Please input your email!' },
+                    { type: 'email', message: 'Please enter a valid email!' }
+                  ]}
+                >
+                  <Input placeholder="john@example.com" />
+                </Form.Item>
+
+                <Form.Item
+                  name="message"
+                  label="Message"
+                  rules={[{ required: true, message: 'Please input your message!' }]}
+                >
+                  <TextArea rows={4} placeholder="Tell us about your project..." />
+                </Form.Item>
+
+                <Form.Item>
+                  <Button type="primary" htmlType="submit" icon={<SendOutlined />} size="large" block>
+                    Send Message
+                  </Button>
+                </Form.Item>
+              </Form>
+            </motion.div>
+          </Col>
+        </Row>
       </div>
     </section>
   );
 }
-
-const ContactInfo = ({ icon, title, content }) => (
-  <div className="flex items-start gap-4">
-    <div className="p-3 rounded-lg bg-primary/10 text-primary">
-      {icon}
-    </div>
-    <div>
-      <h4 className="font-medium mb-1">{title}</h4>
-      <p className="text-foreground/70">{content}</p>
-    </div>
-  </div>
-);
